@@ -4,11 +4,13 @@ import styled,
 } from 'styled-components';
 import { useState }       from 'react';
 
-import { themes, TTheme } from '@/styled/theme';
+import { TTheme, themes } from '@/styled/theme';
 
 const GlobalStyle = createGlobalStyle`
-    body {
+    * {
         margin: 0;
+        padding: 0;
+        box-sizing: border-box;
     }
 `;
 

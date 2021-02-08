@@ -1,11 +1,13 @@
-import { render } from 'react-dom';
+import { render }         from 'react-dom';
 
-import App        from './App';
-import MainLayout from '@layouts/MainLayout';
+import { ApolloProvider } from '@apollo/client';
+import { apolloClient }   from './ApolloClient';
+
+import App                from './App';
 
 render(
-    <MainLayout>
+    <ApolloProvider client={apolloClient}>
         <App />
-    </MainLayout>,
+    </ApolloProvider>,
     document.getElementById('root')
 );

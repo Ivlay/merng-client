@@ -46,6 +46,8 @@ module.exports = {
             'react-dom': '@hot-loader/react-dom',
             '@': path.resolve(__dirname, 'src'),
             '@i18n': path.resolve(__dirname, 'i18n'),
+            '@pages': path.resolve(__dirname, 'src/pages'),
+            '@constants': path.resolve(__dirname, 'src/constants'),
             '@components': path.resolve(__dirname, 'src/components'),
             '@stores': path.resolve(__dirname, 'src/stores'),
             '@layouts': path.resolve(__dirname, 'src/layouts')
