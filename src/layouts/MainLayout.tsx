@@ -5,20 +5,27 @@ import styled,
 import { useState }       from 'react';
 
 import { TTheme, themes } from '@/styled/theme';
+import Header             from '@components/Header';
 
 const GlobalStyle = createGlobalStyle`
     * {
-        margin: 0;
-        padding: 0;
         box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        color: ${({ theme }) => theme.text};
+        background-color: ${({ theme }) => theme.body};
+        transition: background-color 0.25s ease-in, color 0.25s ease-in;
     }
 `;
 
 const MainWrapper = styled.div`
-    color: ${({ theme }) => theme.text};
-    background-color: ${({ theme }) => theme.body};
     min-height: 100vh;
-    transition: background-color 0.25s ease-in, color 0.25s ease-in;
+    max-width: 960px;
+    box-sizing: content-box;
+    padding: 0 15px;
+    margin: 0 auto;
 `;
 
 const Button = styled.button`
@@ -28,7 +35,7 @@ const Button = styled.button`
 const MainLayout: React.FC = ({children}) => {
     const [themeState, setThemeState] = useState<TTheme>('dark');
 
-    //TODO: need think how update theme mb use LS or update useMutation??
+    //TODO: need create hook useTheme
     const handleTheme = () => {
         if (themeState === 'dark') {
             setThemeState('light');
@@ -39,7 +46,8 @@ const MainLayout: React.FC = ({children}) => {
 
     return (
         <ThemeProvider theme={themes[themeState]}>
-            <MainWrapper className='main'>
+            <MainWrapper>
+                <Header />
                 <Button onClick={handleTheme}>Switch theme</Button>
                 <GlobalStyle />
                 {children}

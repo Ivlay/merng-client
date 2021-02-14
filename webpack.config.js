@@ -48,6 +48,7 @@ module.exports = {
             '@i18n': path.resolve(__dirname, 'i18n'),
             '@pages': path.resolve(__dirname, 'src/pages'),
             '@constants': path.resolve(__dirname, 'src/constants'),
+            '@context': path.resolve(__dirname, 'src/context'),
             '@components': path.resolve(__dirname, 'src/components'),
             '@stores': path.resolve(__dirname, 'src/stores'),
             '@layouts': path.resolve(__dirname, 'src/layouts')

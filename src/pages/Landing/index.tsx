@@ -1,5 +1,7 @@
+import Post from '@components/Post';
+
 const LandignPage: React.FC = () => {
-    return <div>Landing Page</div>
+    return <Post />
 };
 
 export default LandignPage;
