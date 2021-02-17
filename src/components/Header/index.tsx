@@ -1,5 +1,8 @@
 import { useContext }  from 'react';
 import styled          from 'styled-components';
+import { Link }        from 'react-router-dom';
+
+import { LANDING }     from '@constants/routes';
 
 import { AuthContext } from '@/context/authContext';
 
@@ -14,7 +17,7 @@ const Header: React.FC = () => {
 
     return (
         <HeaderStyle>
-            { user ? <div>{user.userName}</div> : <div>Header</div>}
+            {user ? <div>{user.userName}</div> : <Link to={LANDING}>Header</Link>}
         </HeaderStyle>
     )
 };

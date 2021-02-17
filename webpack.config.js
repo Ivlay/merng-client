@@ -11,8 +11,16 @@ const isDev = process.env.NODE_ENV === 'development';
 const optimization = () => {
     const config = {
         splitChunks: {
-            chunks: 'all'
-        }
+            cacheGroups: {
+                vendor: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendors',
+                    chunks: 'all',
+                }
+            }
+        },
+        moduleIds: 'deterministic',
+        runtimeChunk: 'single'
     };
 
     if (!isDev) {
@@ -36,7 +44,7 @@ module.exports = {
 
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: '[name].build.js',
+        filename: '[name].[contenthash].build.js',
         publicPath: '/',
     },
 
