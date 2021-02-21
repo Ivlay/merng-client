@@ -10,9 +10,15 @@ const InputStyle = styled.input`
     padding: 9px 16px;
 `;
 
+type TInputName = 
+    | 'password'
+    | 'confirmPassword'
+    | 'email'
+    | 'userName';
+
 interface IInput {
     type        : 'password' | 'text' | 'email';
-    name        : string;
+    name        : TInputName;
     placeholder : string;
     value       : string;
     onChange    : (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -22,13 +28,16 @@ interface IInput {
 const Input: React.FC<IInput> = ({ type, name, placeholder, value, onChange }) => {
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => onChange(e);
 
+    const autocomplete = name === 'password' || name === 'confirmPassword' ? 'new-password' : '';
+
     return (
         <InputStyle
-            type        = {type}
-            name        = {name}
-            placeholder = {placeholder}
-            value       = {value}
-            onChange    = {handleInputChange}
+            type         = {type}
+            name         = {name}
+            placeholder  = {placeholder}
+            value        = {value}
+            onChange     = {handleInputChange}
+            autoComplete = {autocomplete}
         />
     );
 };

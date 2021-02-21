@@ -16,6 +16,7 @@ const AuthContext = createContext<IUserContext>({
 });
 
 const AuthProvider: React.FC = ({ children }) => {
+    //TODO: need research about local state @client Apollo
     const [state, dispatch]       = useReducer(authReducer, { user: null });
     const { setItem, removeItem } = useLocaleStorage('AUTH_TOKEN');
 

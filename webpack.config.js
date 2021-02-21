@@ -1,4 +1,3 @@
-const webpack                 = require('webpack');
 const path                    = require('path');
 const HTMLWebpackPlugin       = require('html-webpack-plugin');
 const { CleanWebpackPlugin }  = require('clean-webpack-plugin');
@@ -8,24 +7,51 @@ const TerserWebpackPlugin     = require('terser-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
 
-const optimization = () => {
-    const config = {
-        splitChunks: {
-            cacheGroups: {
-                vendor: {
-                    test: /[\\/]node_modules[\\/]/,
-                    name: 'vendors',
-                    chunks: 'all',
-                }
+const splitChunksConfigs = {
+    dev: {
+        cacheGroups: {
+            default: false,
+            vendors: false,
+        }
+    },
+    prod: {
+        //TODO: need research about split chunks loads chunk > 300+kb defaultVendors//FIXME:
+        chunks: 'all',
+        cacheGroups: {
+            reactVendor: {
+                name: 'reactvendor',
+                test: /(?<!node_modules.*)[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+                priority: 40,
+                enforce: true,
+                chunks: 'all'
+            },
+            styled: {
+                name: 'styledvendor',
+                test: /[\\/]node_modules[\\/](styled-components)[\\/]/,
             }
         },
+        maxInitialRequests: 25,
+        minSize: 20000
+    }
+};
+
+const optimization = () => {
+    const config = {
+        minimize: !isDev,
+        realContentHash: false,
+        runtimeChunk: 'single',
         moduleIds: 'deterministic',
-        runtimeChunk: 'single'
+        splitChunks: isDev ? splitChunksConfigs.dev : splitChunksConfigs.prod
     };
 
     if (!isDev) {
         config.minimizer = [
-            new TerserWebpackPlugin()
+            new TerserWebpackPlugin({
+                terserOptions: {
+                    sourceMap: true,
+                    compress: true
+                }
+            })
         ]
     };
 
@@ -39,6 +65,7 @@ module.exports = {
     devtool: 'source-map',
 
     entry: [
+        '@babel/polyfill',
         path.resolve(__dirname, './src/index.tsx')
     ],
 
@@ -48,12 +75,18 @@ module.exports = {
         publicPath: '/',
     },
 
+    stats: {
+		chunks: true,
+		chunkRelations: true
+	},
+
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.json'],
+        extensions: ['.ts', '.tsx', '.js', '.json', '.svg'],
         alias: {
             'react-dom': '@hot-loader/react-dom',
             '@': path.resolve(__dirname, 'src'),
             '@i18n': path.resolve(__dirname, 'i18n'),
+            '@assets': path.resolve(__dirname, 'public/static/assets'),
             '@pages': path.resolve(__dirname, 'src/pages'),
             '@constants': path.resolve(__dirname, 'src/constants'),
             '@context': path.resolve(__dirname, 'src/context'),
@@ -72,8 +105,14 @@ module.exports = {
         compress: true,
         hot: true,
         port: 3000,
-        quiet: true,
-        stats: 'errors-only'
+        quiet: false,
+        noInfo: isDev,
+        stats: { colors: true }
+    },
+
+    performance: {
+        maxEntrypointSize: 512000,
+        maxAssetSize: 512000
     },
 
     plugins: [
@@ -88,7 +127,6 @@ module.exports = {
 
         // }),
         new CleanWebpackPlugin(),
-        new webpack.HotModuleReplacementPlugin()
     ],
 
     module: {
@@ -104,18 +142,18 @@ module.exports = {
                             presets: [
                                 '@babel/preset-env',
                                 '@babel/preset-typescript',
-                                ["@babel/preset-react", {
-                                    "runtime": "automatic"
+                                ['@babel/preset-react', {
+                                    'runtime': 'automatic'
                                 }],
                             ],
                             plugins: [
                                 'react-hot-loader/babel',
-                                ["babel-plugin-styled-components", {
-                                    "pure": true,
-                                    "displayName": isDev,
-                                    "fileName": isDev,
-                                    "minify": isDev,
-                                    "transpileTemplateLiterals": isDev
+                                ['babel-plugin-styled-components', {
+                                    'pure': true,
+                                    'displayName': isDev,
+                                    'fileName': isDev,
+                                    'minify': !isDev,
+                                    'transpileTemplateLiterals': isDev
                                 }]
                             ],
                         }
@@ -123,7 +161,7 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+                test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
                 exclude: /node_modules/,
                 type: 'asset/resource',
             },

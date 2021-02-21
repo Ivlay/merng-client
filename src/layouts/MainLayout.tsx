@@ -1,24 +1,11 @@
-import styled,
-{   createGlobalStyle,
-    ThemeProvider
-} from 'styled-components';
-import { useState }       from 'react';
+import styled, { ThemeProvider } from 'styled-components';
+import React, { useState }       from 'react';
 
-import { TTheme, themes } from '@/styled/theme';
-import Header             from '@components/Header';
+import { TTheme, themes }        from '@/styled/theme';
+import { GlobalStyle }           from '@/styled/globalStyles';
 
-const GlobalStyle = createGlobalStyle`
-    * {
-        box-sizing: border-box;
-    }
-
-    body {
-        margin: 0;
-        color: ${({ theme }) => theme.text};
-        background-color: ${({ theme }) => theme.body};
-        transition: background-color 0.25s ease-in, color 0.25s ease-in;
-    }
-`;
+import Header                    from '@components/Header';
+import Button                    from '@components/UI/Button';
 
 const MainWrapper = styled.div`
     min-height: 100vh;
@@ -28,8 +15,8 @@ const MainWrapper = styled.div`
     margin: 0 auto;
 `;
 
-const Button = styled.button`
-    color: ${({ theme }) => theme.text};
+const SwitcherTheme = styled(Button)`
+    width: 120px;
 `;
 
 const MainLayout: React.FC = ({children}) => {
@@ -48,7 +35,10 @@ const MainLayout: React.FC = ({children}) => {
         <ThemeProvider theme={themes[themeState]}>
             <MainWrapper>
                 <Header />
-                <Button onClick={handleTheme}>Switch theme</Button>
+                <SwitcherTheme
+                    label= 'Switch theme'
+                    onClick = {handleTheme}
+                />
                 <GlobalStyle />
                 {children}
             </MainWrapper>

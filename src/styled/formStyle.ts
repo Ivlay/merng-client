@@ -7,6 +7,10 @@ export const FormContainer = styled.div`
     width: 100%;
     padding: 48px;
     margin: 0 auto;
+
+    @media(max-width: 768px) {
+        padding: 0;
+    }
 `;
 
 export const Form = styled.form`

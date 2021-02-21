@@ -33,7 +33,7 @@
 		"jsx": "preserve"
 	},
 	"include": [
-		"next-env.d.ts",
+		"react-env.d.ts",
 		"**/*.ts",
 		"**/*.tsx", "server.js",
 	],

@@ -5,6 +5,7 @@ import { useMutation }         from '@apollo/client';
 import Input                   from '@components/UI/Input';
 
 import { Form, FormContainer } from '@/styled/formStyle';
+import Button from '@/components/UI/Button';
 
 const SignUpPage: React.FC = () => {
     const { handleInputvalue, values, handleSubmitForm } = useForm(
@@ -67,8 +68,10 @@ const SignUpPage: React.FC = () => {
                     onChange    = {handleInputvalue}
                     errorText   = ''
                 />
-                //TODO: Create Button component
-                <button>Sign up</button>
+                <Button
+                    label     = 'Sign Up'
+                    isLoading = {loading}
+                />
             </Form>
         </FormContainer>
     );
