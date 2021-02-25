@@ -25,9 +25,9 @@ const App = () => {
 
     return (
         <AuthProvider>
-            <Suspense fallback={null}>
-                <Router>
-                    <MainLayout>
+            <Router>
+                <MainLayout>
+                    <Suspense fallback={null}>
                         <Switch>
                             {storedItem && <Redirect from={appRoutes.LOGIN} to={appRoutes.LANDING} exact/>}
                             {storedItem && <Redirect from={appRoutes.SIGNUP} to={appRoutes.LANDING} exact/>}
@@ -48,9 +48,9 @@ const App = () => {
                             </Route>
                             <Redirect from='/*' to={appRoutes.LANDING} exact/>
                         </Switch>
-                    </MainLayout>
-                </Router>
-            </Suspense>
+                    </Suspense>
+                </MainLayout>
+            </Router>
         </AuthProvider>
     );
 };

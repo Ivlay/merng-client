@@ -1,5 +1,13 @@
 import { gql } from '@apollo/client';
 
+export interface IUser {
+    userName  : string;
+    email     : string;
+    token     : string;
+    createdAt : string;
+    id        : string;
+};
+
 export const LOGIN_USER = gql`
     mutation login(
         $userName : String!

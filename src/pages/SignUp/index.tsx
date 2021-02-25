@@ -1,11 +1,13 @@
-import { REGISTER_USER }       from '@/graphql/User';
-import { useForm }             from '@/hooks/useForm';
 import { useMutation }         from '@apollo/client';
 
-import Input                   from '@components/UI/Input';
+import { useForm }             from '@hooks/useForm';
 
-import { Form, FormContainer } from '@/styled/formStyle';
-import Button from '@/components/UI/Button';
+import { REGISTER_USER }       from '@graphql/User';
+
+import Input                   from '@components/UI/Input';
+import Button                  from '@components/UI/Button';
+
+import { Form, FormContainer } from '@styled/formStyle';
 
 const SignUpPage: React.FC = () => {
     const { handleInputvalue, values, handleSubmitForm } = useForm(
@@ -39,7 +41,7 @@ const SignUpPage: React.FC = () => {
                 <Input
                     name        = 'userName'
                     value       = {values.userName}
-                    placeholder = 'User name'
+                    placeholder = 'Name'
                     type        = 'text'
                     onChange    = {handleInputvalue}
                     errorText   = ''

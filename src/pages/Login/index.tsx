@@ -1,14 +1,16 @@
 import { useContext }          from 'react';
 import { useMutation }         from '@apollo/client';
 
+import { useForm }             from '@hooks/useForm';
+
+import { LOGIN_USER, IUser }   from '@graphql/User';
 import { AuthContext }         from '@context/authContext';
-import { useForm }             from '@/hooks/useForm';
-import { LOGIN_USER }          from '@/graphql/User';
-import { IUser }               from '@stores/authReducer';
+
 
 import Input                   from '@components/UI/Input';
+import Button                  from '@components/UI/Button';
 
-import { Form, FormContainer } from '@/styled/formStyle';
+import { Form, FormContainer } from '@styled/formStyle';
 
 const LoginPage: React.FC = () => {
     const { handleInputvalue, values, handleSubmitForm } = useForm(handleSubmit, { password: '', userName: '' });
@@ -38,7 +40,7 @@ const LoginPage: React.FC = () => {
                 <Input
                     name        = 'userName'
                     value       = {values.userName}
-                    placeholder = 'User name'
+                    placeholder = 'Name'
                     type        = 'text'
                     onChange    = {handleInputvalue}
                     errorText   = ''
@@ -51,7 +53,10 @@ const LoginPage: React.FC = () => {
                     onChange    = {handleInputvalue}
                     errorText   = ''
                 />
-                <button>Login</button>
+                <Button
+                    label     = 'Login'
+                    isLoading = {loading}
+                />
             </Form>
         </FormContainer>
     );

@@ -8,22 +8,23 @@ const TerserWebpackPlugin     = require('terser-webpack-plugin');
 const isDev = process.env.NODE_ENV === 'development';
 
 const splitChunksConfigs = {
-    dev: {
-        cacheGroups: {
-            default: false,
-            vendors: false,
-        }
-    },
     prod: {
-        //TODO: need research about split chunks loads chunk > 300+kb defaultVendors//FIXME:
         chunks: 'all',
         cacheGroups: {
-            reactVendor: {
-                name: 'reactvendor',
-                test: /(?<!node_modules.*)[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+            framework: {
+                chunks: 'all',
+                name: 'framework',
+                test: /(?<!node_modules.*)[\\/]node_modules[\\/](react|react-dom|scheduler|prop-types|use-subscription)[\\/]/,
                 priority: 40,
                 enforce: true,
-                chunks: 'all'
+            },
+            apollo: {
+                name: 'apollo',
+                test: /[\\/]node_modules[\\/](@apollo)[\\/]/
+            },
+            graphql: {
+                name: 'graphql',
+                test: /[\\/]node_modules[\\/](graphql)[\\/]/
             },
             styled: {
                 name: 'styledvendor',
@@ -39,9 +40,9 @@ const optimization = () => {
     const config = {
         minimize: !isDev,
         realContentHash: false,
-        runtimeChunk: 'single',
+        runtimeChunk: isDev ? {name: 'webpack'} : 'single',
         moduleIds: 'deterministic',
-        splitChunks: isDev ? splitChunksConfigs.dev : splitChunksConfigs.prod
+        splitChunks: isDev ? false : splitChunksConfigs.prod
     };
 
     if (!isDev) {
@@ -65,13 +66,12 @@ module.exports = {
     devtool: 'source-map',
 
     entry: [
-        '@babel/polyfill',
         path.resolve(__dirname, './src/index.tsx')
     ],
 
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: '[name].[contenthash].build.js',
+        filename: '[name].[contenthash].js',
         publicPath: '/',
     },
 
@@ -81,12 +81,15 @@ module.exports = {
 	},
 
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.json', '.svg'],
+        extensions: ['.ts', '.tsx', '.js', '.json'],
         alias: {
             'react-dom': '@hot-loader/react-dom',
             '@': path.resolve(__dirname, 'src'),
             '@i18n': path.resolve(__dirname, 'i18n'),
             '@assets': path.resolve(__dirname, 'public/static/assets'),
+            '@hooks': path.resolve(__dirname, 'src/hooks'),
+            '@graphql': path.resolve(__dirname, 'src/graphql'),
+            '@styled': path.resolve(__dirname, 'src/styled'),
             '@pages': path.resolve(__dirname, 'src/pages'),
             '@constants': path.resolve(__dirname, 'src/constants'),
             '@context': path.resolve(__dirname, 'src/context'),
@@ -110,17 +113,15 @@ module.exports = {
         stats: { colors: true }
     },
 
-    performance: {
-        maxEntrypointSize: 512000,
-        maxAssetSize: 512000
-    },
+    performance: false,
 
     plugins: [
         new HTMLWebpackPlugin({
             template: path.resolve(__dirname, './public/index.html'),
             filename: 'index.html',
             minify: {
-                collapseWhitespace: !isDev
+                collapseWhitespace: !isDev,
+                removeComments: !isDev,
             }
         }),
         // new CopyWebpackPlugin({

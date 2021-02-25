@@ -14,11 +14,11 @@ export const FormContainer = styled.div`
 `;
 
 export const Form = styled.form`
-    input {
-        margin-bottom: 25px;
+    input + input {
+        margin-top: 25px;
+    }
 
-        &:last-child {
-            margin-bottom: 0;
-        }
+    input + button {
+        margin-top: 25px;
     }
 `;

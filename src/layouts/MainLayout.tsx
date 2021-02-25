@@ -1,8 +1,8 @@
 import styled, { ThemeProvider } from 'styled-components';
 import React, { useState }       from 'react';
 
-import { TTheme, themes }        from '@/styled/theme';
-import { GlobalStyle }           from '@/styled/globalStyles';
+import { TTheme, themes }        from '@styled/theme';
+import { GlobalStyle }           from '@styled/globalStyles';
 
 import Header                    from '@components/Header';
 import Button                    from '@components/UI/Button';

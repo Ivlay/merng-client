@@ -10,8 +10,8 @@ export type IpropertiesThemes = typeof themes.dark;
 
 export const themes = {
     dark: {
-        body: '#222226',
-        text: '#ADADB5',
+        backgroundColor: '#222226',
+        color: '#ADADB5',
         button: {
             gradient: {
                 1: '#DA5201',
@@ -21,8 +21,8 @@ export const themes = {
         }
     },
     light: {
-        body: '#FFF',
-        text: '#2E444E',
+        backgroundColor: '#FFF',
+        color: '#2E444E',
         button: {
             gradient: {
                 1: '#137272',

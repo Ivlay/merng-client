@@ -10,7 +10,7 @@ const ButtonStyle = styled.button<Pick<IButton, 'isLoading' | 'isActive' | 'isDi
 
     background-image: linear-gradient(
         312.44deg, ${props => props.theme.button.gradient[1]} 0%,
-        ${props => props.theme.button.gradient[1]} 100%
+        ${props => props.theme.button.gradient[2]} 100%
     );
 
     color: ${props => props.theme.button.color};
