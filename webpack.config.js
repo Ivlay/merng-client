@@ -8,6 +8,12 @@ const TerserWebpackPlugin     = require('terser-webpack-plugin');
 const isDev = process.env.NODE_ENV === 'development';
 
 const splitChunksConfigs = {
+    dev: {
+        cacheGroups: {
+            default: false,
+            vendors: false,
+        }
+    },
     prod: {
         chunks: 'all',
         cacheGroups: {
@@ -40,9 +46,9 @@ const optimization = () => {
     const config = {
         minimize: !isDev,
         realContentHash: false,
-        runtimeChunk: isDev ? {name: 'webpack'} : 'single',
+        runtimeChunk: isDev ? { name: 'webpack' } : 'single',
         moduleIds: 'deterministic',
-        splitChunks: isDev ? false : splitChunksConfigs.prod
+        splitChunks: isDev ? splitChunksConfigs.dev : splitChunksConfigs.prod
     };
 
     if (!isDev) {
@@ -154,7 +160,7 @@ module.exports = {
                                     'displayName': isDev,
                                     'fileName': isDev,
                                     'minify': !isDev,
-                                    'transpileTemplateLiterals': isDev
+                                    'transpileTemplateLiterals': !isDev
                                 }]
                             ],
                         }

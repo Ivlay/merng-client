@@ -18,7 +18,8 @@ export const themes = {
                 2: '#F8772B'
             },
             color: '#FFDBAD'
-        }
+        },
+        border: '#ADADB53D'
     },
     light: {
         backgroundColor: '#FFF',
@@ -29,6 +30,7 @@ export const themes = {
                 2: '#1A8F89'
             },
             color: '#FFF'
-        }
+        },
+        border: '#ADADB59C'
     }
 };

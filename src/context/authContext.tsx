@@ -1,7 +1,8 @@
 import { createContext, useReducer } from 'react';
 
-import { authReducer, IUser } from '@stores/authReducer';
-import { useLocaleStorage }   from '@/hooks/useLocaleStorage';
+import { authReducer }               from '@stores/authReducer';
+import { useLocaleStorage }          from '@hooks/useLocaleStorage';
+import { IUser }                     from '@graphql/User';
 
 export interface IUserContext {
     user   : IUser,
