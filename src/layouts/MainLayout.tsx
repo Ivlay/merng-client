@@ -19,16 +19,16 @@ const SwitcherTheme = styled(Button)`
     width: 120px;
 `;
 
-const MainLayout: React.FC = ({children}) => {
+const MainLayout: React.FC = ({ children }) => {
     const [themeState, setThemeState] = useState<TTheme>('dark');
 
-    //TODO: need create hook useTheme
+    // TODO: need create hook useTheme
     const handleTheme = () => {
         if (themeState === 'dark') {
             setThemeState('light');
         } else {
             setThemeState('dark');
-        };
+        }
     };
 
     return (
@@ -36,7 +36,7 @@ const MainLayout: React.FC = ({children}) => {
             <MainWrapper>
                 <Header />
                 <SwitcherTheme
-                    label= 'Switch theme'
+                    label   = 'Switch theme'
                     onClick = {handleTheme}
                 />
                 <GlobalStyle />

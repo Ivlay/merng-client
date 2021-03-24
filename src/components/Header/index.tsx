@@ -19,7 +19,7 @@ const Header: React.FC = () => {
         <HeaderStyle>
             {user ? <div>{user.userName}</div> : <Link to={LANDING}>Header</Link>}
         </HeaderStyle>
-    )
+    );
 };
 
 export default Header;

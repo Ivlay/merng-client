@@ -5,7 +5,6 @@ import {
     Redirect
 } from 'react-router-dom';
 import { lazy, Suspense }   from 'react';
-import { hot }              from 'react-hot-loader/root';
 
 import * as appRoutes       from '@constants/routes';
 
@@ -18,7 +17,6 @@ const LoginPage   = lazy(() => import('@pages/Login'));
 const SignUpPage  = lazy(() => import('@pages/SignUp'));
 const PostPage    = lazy(() => import('@pages/Post'));
 const UserPage    = lazy(() => import('@pages/UserPage'));
-
 
 const App = () => {
     const { storedItem } = useLocaleStorage<string>('AUTH_TOKEN');
@@ -55,4 +53,4 @@ const App = () => {
     );
 };
 
-export default hot(App);
+export default App;

@@ -17,13 +17,13 @@ const LoginPage: React.FC = () => {
 
     const { login } = useContext(AuthContext);
 
-    const [ handleLogin, { loading } ] = useMutation<{login: IUser}>(LOGIN_USER, {
+    const [handleLogin, { loading }] = useMutation<{login: IUser}>(LOGIN_USER, {
         update(_proxy, result) {
-            login(result.data.login)
+            login(result.data.login);
         },
         onError(err) {
-            //TODO: add response errors
-            console.log(err.graphQLErrors[0].extensions.errors)
+            // TODO: add response errors
+            console.log(err.graphQLErrors[0].extensions.errors);
         },
         variables: values
     });
@@ -31,8 +31,8 @@ const LoginPage: React.FC = () => {
     function handleSubmit() {
         if (!loading) {
             handleLogin();
-        };
-    };
+        }
+    }
 
     return (
         <FormContainer>

@@ -4,7 +4,7 @@ type TActionAuth = { type: 'LOGIN', payload: IUser } | { type: 'LOGOUT' };
 
 interface IUserState {
     user: IUser;
-};
+}
 
 export const authReducer = (state: IUserState, action: TActionAuth): IUserState => {
     switch(action.type) {
@@ -19,6 +19,6 @@ export const authReducer = (state: IUserState, action: TActionAuth): IUserState 
                 user: null
             };
         default:
-            return state
-    };
+            return state;
+    }
 };

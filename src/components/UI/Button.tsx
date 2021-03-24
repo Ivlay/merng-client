@@ -36,7 +36,7 @@ interface IButton {
     isActive?   : boolean;
     isDisabled? : boolean;
     onClick?    : () => void;
-};
+}
 
 const Button: React.FC<IButton> = ({
     label,

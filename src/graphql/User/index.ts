@@ -6,7 +6,7 @@ export interface IUser {
     token     : string;
     createdAt : string;
     id        : string;
-};
+}
 
 export const LOGIN_USER = gql`
     mutation login(

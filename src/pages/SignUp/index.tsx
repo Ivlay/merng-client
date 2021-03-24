@@ -19,9 +19,9 @@ const SignUpPage: React.FC = () => {
             confirmPassword : ''
         });
 
-    const [ signUp, { loading } ] = useMutation(REGISTER_USER, {
+    const [signUp, { loading }] = useMutation(REGISTER_USER, {
         update(_poxy, result) {
-            console.log(result)
+            console.log(result);
         },
         onError(err) {
             console.log(err.graphQLErrors[0].extensions.errors);
@@ -32,8 +32,8 @@ const SignUpPage: React.FC = () => {
     function handleSubmit() {
         if (!loading) {
             signUp();
-        };
-    };
+        }
+    }
 
     return (
         <FormContainer>

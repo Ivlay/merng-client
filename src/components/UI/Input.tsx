@@ -24,7 +24,7 @@ const InputStyle = styled.input`
     }
 `;
 
-type TInputName = 
+type TInputName =
     | 'password'
     | 'confirmPassword'
     | 'email'
@@ -38,7 +38,7 @@ interface IInput {
     value       : string;
     onChange    : (e: React.ChangeEvent<HTMLInputElement>) => void;
     errorText   : string;
-};
+}
 
 const Input: React.FC<IInput> = ({ type, name, placeholder, value, onChange, className }) => {
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => onChange(e);

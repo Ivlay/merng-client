@@ -29,7 +29,7 @@ const LandignPage: React.FC = () => {
                     }
                 </PostWrapper>
             );
-        };
+        }
     };
 
     return (

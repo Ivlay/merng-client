@@ -5,10 +5,10 @@ export const useLocaleStorage = <T>(key: string) => {
         try {
             const item = localStorage.getItem(key);
 
-            return item ? JSON.parse(item) : ''
+            return item ? JSON.parse(item) : '';
         } catch (error) {
-            return ''
-        };
+            return '';
+        }
     });
 
     const setItem = (value: T) => {
@@ -20,7 +20,7 @@ export const useLocaleStorage = <T>(key: string) => {
             localStorage.setItem(key, JSON.stringify(valueToStore));
         } catch (error) {
             console.log(error);
-        };
+        }
     };
 
     const removeItem = () => {
@@ -28,7 +28,7 @@ export const useLocaleStorage = <T>(key: string) => {
             localStorage.removeItem(key);
         } catch (error) {
             console.log(error);
-        };
+        }
     };
 
     const clearStorage = () => {
@@ -36,8 +36,8 @@ export const useLocaleStorage = <T>(key: string) => {
             localStorage.clear();
         } catch (error) {
             console.log(error);
-        };
+        }
     };
 
-    return {storedItem, setItem, removeItem, clearStorage};
+    return { storedItem, setItem, removeItem, clearStorage };
 };

@@ -9,7 +9,7 @@ export interface IPost {
     likeCount    : number;
     likes        : Pick<IPost, 'userName' | 'createdAt' | 'id'>[];
     userName     : string;
-};
+}
 
 export const GET_POSTS = gql`
     {

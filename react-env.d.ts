@@ -1,5 +1,5 @@
 type TRoutes = 'postId' | 'userName';
 
 export module 'react-router-dom' {
-    function useParams(): Record<TRoutes, string>;
-};
+    export function useParams(): Record<TRoutes, string>;
+}
