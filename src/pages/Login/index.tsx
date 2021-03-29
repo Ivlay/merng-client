@@ -13,7 +13,7 @@ import Button                  from '@components/UI/Button';
 import { Form, FormContainer } from '@styled/formStyle';
 
 const LoginPage: React.FC = () => {
-    const { handleInputvalue, values, handleSubmitForm } = useForm(handleSubmit, { password: '', userName: '' });
+    const { handleInputvalue, values } = useForm({ password: '', userName: '' });
 
     const { login } = useContext(AuthContext);
 
@@ -28,11 +28,12 @@ const LoginPage: React.FC = () => {
         variables: values
     });
 
-    function handleSubmit() {
+    const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         if (!loading) {
             handleLogin();
         }
-    }
+    };
 
     return (
         <FormContainer>

@@ -1,6 +1,7 @@
 import styled    from 'styled-components';
 
 import { IPost } from '@graphql/Post';
+import useDate   from '@hooks/useDate';
 
 export const PostWrapper = styled.section`
     display: grid;
@@ -36,7 +37,7 @@ const PostStyle = styled.article`
     }
 
     .date {
-        font-size: 13px;
+        font-size: 11px;
         opacity: 0.7;
     }
 
@@ -46,7 +47,7 @@ const PostStyle = styled.article`
 `;
 
 const Post: React.FC<IPost> = (post: IPost) => {
-    const date = new Date(post.createdAt).toLocaleString();
+    const { date } = useDate(Date.parse(post.createdAt));
 
     return (
         <PostStyle>

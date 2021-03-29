@@ -10,8 +10,7 @@ import Button                  from '@components/UI/Button';
 import { Form, FormContainer } from '@styled/formStyle';
 
 const SignUpPage: React.FC = () => {
-    const { handleInputvalue, values, handleSubmitForm } = useForm(
-        handleSubmit,
+    const { handleInputvalue, values } = useForm(
         {
             userName        : '',
             email           : '',
@@ -29,11 +28,13 @@ const SignUpPage: React.FC = () => {
         variables: values
     });
 
-    function handleSubmit() {
+    const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
         if (!loading) {
             signUp();
         }
-    }
+    };
 
     return (
         <FormContainer>

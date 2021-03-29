@@ -4,7 +4,7 @@ import { Link }        from 'react-router-dom';
 
 import { LANDING }     from '@constants/routes';
 
-import { AuthContext } from '@/context/authContext';
+import { AuthContext } from '@context/authContext';
 
 const HeaderStyle = styled.header`
     display: flex;
