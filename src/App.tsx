@@ -5,7 +5,6 @@ import {
     Redirect
 } from 'react-router-dom';
 import { lazy, Suspense }   from 'react';
-import { hot }              from 'react-hot-loader/root';
 
 import * as appRoutes       from '@constants/routes';
 
@@ -19,15 +18,14 @@ const SignUpPage  = lazy(() => import('@pages/SignUp'));
 const PostPage    = lazy(() => import('@pages/Post'));
 const UserPage    = lazy(() => import('@pages/UserPage'));
 
-
 const App = () => {
     const { storedItem } = useLocaleStorage<string>('AUTH_TOKEN');
 
     return (
         <AuthProvider>
-            <Suspense fallback={null}>
-                <Router>
-                    <MainLayout>
+            <Router>
+                <MainLayout>
+                    <Suspense fallback={null}>
                         <Switch>
                             {storedItem && <Redirect from={appRoutes.LOGIN} to={appRoutes.LANDING} exact/>}
                             {storedItem && <Redirect from={appRoutes.SIGNUP} to={appRoutes.LANDING} exact/>}
@@ -48,11 +46,11 @@ const App = () => {
                             </Route>
                             <Redirect from='/*' to={appRoutes.LANDING} exact/>
                         </Switch>
-                    </MainLayout>
-                </Router>
-            </Suspense>
+                    </Suspense>
+                </MainLayout>
+            </Router>
         </AuthProvider>
     );
 };
 
-export default hot(App);
+export default App;

@@ -1,15 +1,16 @@
-import { REGISTER_USER }       from '@/graphql/User';
-import { useForm }             from '@/hooks/useForm';
 import { useMutation }         from '@apollo/client';
 
-import Input                   from '@components/UI/Input';
+import { useForm }             from '@hooks/useForm';
 
-import { Form, FormContainer } from '@/styled/formStyle';
-import Button from '@/components/UI/Button';
+import { REGISTER_USER }       from '@graphql/User';
+
+import Input                   from '@components/UI/Input';
+import Button                  from '@components/UI/Button';
+
+import { Form, FormContainer } from '@styled/formStyle';
 
 const SignUpPage: React.FC = () => {
-    const { handleInputvalue, values, handleSubmitForm } = useForm(
-        handleSubmit,
+    const { handleInputvalue, values } = useForm(
         {
             userName        : '',
             email           : '',
@@ -17,9 +18,9 @@ const SignUpPage: React.FC = () => {
             confirmPassword : ''
         });
 
-    const [ signUp, { loading } ] = useMutation(REGISTER_USER, {
+    const [signUp, { loading }] = useMutation(REGISTER_USER, {
         update(_poxy, result) {
-            console.log(result)
+            console.log(result);
         },
         onError(err) {
             console.log(err.graphQLErrors[0].extensions.errors);
@@ -27,10 +28,12 @@ const SignUpPage: React.FC = () => {
         variables: values
     });
 
-    function handleSubmit() {
+    const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
         if (!loading) {
             signUp();
-        };
+        }
     };
 
     return (
@@ -39,7 +42,7 @@ const SignUpPage: React.FC = () => {
                 <Input
                     name        = 'userName'
                     value       = {values.userName}
-                    placeholder = 'User name'
+                    placeholder = 'Name'
                     type        = 'text'
                     onChange    = {handleInputvalue}
                     errorText   = ''

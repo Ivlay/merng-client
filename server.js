@@ -14,4 +14,4 @@ app.get('*', (req, res) => res.sendFile(HTML_FILE));
 app.listen(app.get('port'));
 
 
-//TODO: need investigation about best practices
+// TODO: need investigation about best practices

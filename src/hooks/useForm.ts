@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const useForm = <T>(func: () => void, initialState: T) => {
+export const useForm = <T>(initialState: T) => {
     const [values, setValues] = useState(initialState);
 
     const handleInputvalue = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -10,14 +10,7 @@ export const useForm = <T>(func: () => void, initialState: T) => {
         });
     };
 
-    const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        func();
-    };
-
     return {
-        handleSubmitForm,
         handleInputvalue,
         values
     };

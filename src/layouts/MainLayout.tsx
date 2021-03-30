@@ -1,8 +1,9 @@
 import styled, { ThemeProvider } from 'styled-components';
-import React, { useState }       from 'react';
 
-import { TTheme, themes }        from '@/styled/theme';
-import { GlobalStyle }           from '@/styled/globalStyles';
+import { themes }                from '@styled/theme';
+import { GlobalStyle }           from '@styled/globalStyles';
+
+import useTheme                  from '@hooks/useTheme';
 
 import Header                    from '@components/Header';
 import Button                    from '@components/UI/Button';
@@ -19,25 +20,16 @@ const SwitcherTheme = styled(Button)`
     width: 120px;
 `;
 
-const MainLayout: React.FC = ({children}) => {
-    const [themeState, setThemeState] = useState<TTheme>('dark');
-
-    //TODO: need create hook useTheme
-    const handleTheme = () => {
-        if (themeState === 'dark') {
-            setThemeState('light');
-        } else {
-            setThemeState('dark');
-        };
-    };
+const MainLayout: React.FC = ({ children }) => {
+    const { theme, switchTheme } = useTheme();
 
     return (
-        <ThemeProvider theme={themes[themeState]}>
+        <ThemeProvider theme={themes[theme]}>
             <MainWrapper>
                 <Header />
                 <SwitcherTheme
-                    label= 'Switch theme'
-                    onClick = {handleTheme}
+                    label   = 'Switch theme'
+                    onClick = {switchTheme}
                 />
                 <GlobalStyle />
                 {children}

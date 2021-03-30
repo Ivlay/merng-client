@@ -15,6 +15,9 @@
 			"@context/*": ["src/context/*"],
 			"@constants/*": ["src/constants/*"],
 			"@assets/*": ["public/static/assets/*"],
+			"@styled/*": ["src/styled/*"],
+			"@hooks/*": ["src/hooks/*"],
+			"@graphql/*": ["src/graphql/*"],
 			"@layouts/*": ["src/layouts/*"],
 			"@stores/*": ["src/stores/*"]
 		},
